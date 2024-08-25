@@ -9,6 +9,10 @@ function Header({user}: any) {
           <Link href="/" className="text-xl font-bold">
             Todoist
           </Link>
+          <div>
+          {user?.uid && <Link href="/todos" className="ml-4 text-xl font-semibold text-red-500">
+              Todos
+            </Link>}
           {user?.uid ? (
             <Link href="/auth/logout" className="ml-4 text-xl font-bold">
               Logout
@@ -18,6 +22,7 @@ function Header({user}: any) {
               Login
             </Link>
           )}
+          </div>
         </nav>
       </header>
     </>

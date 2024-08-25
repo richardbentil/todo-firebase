@@ -14,3 +14,11 @@
   width: 70px;
   height: 70px;
 }
+
+.login-bg {
+  background-image: url("../public//img/login_bg.jpg") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  padding: 20px !important;
+  height: 95vh !important;
+}

@@ -1,11 +1,13 @@
 import Header from '@/components/common/Header'
 import Layout from '@/components/common/Layout'
+import useAuth from '@/hooks/useAuthState'
 import React from 'react'
 
 function Home() {
+  const {user} = useAuth()
   return (
     <Layout>
-      <Header />
+      <Header user={user} />
      <div className="md:columns-2 h-screen">
       <div className="p-6 flex justify-center items-center h-4/5">
         <div>

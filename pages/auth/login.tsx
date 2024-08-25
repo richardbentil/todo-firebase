@@ -1,6 +1,6 @@
-import Header from "@/components/common/Header";
 import Layout from "@/components/common/Layout";
 import LoginForm from "@/modules/LoginForm";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -10,7 +10,6 @@ function Login() {
   const router = useRouter();
   return (
     <Layout>
-      <Header />
       <div className="lg:columns-2">
         <div className="pb-3 mt-2 lg:mt-8 xl:mt-0 p-4 h-screen flex justify-center items-center overflow-y-auto">
           <div className="lg:w-6/12">
@@ -47,7 +46,11 @@ function Login() {
             </div>
           </div>
         </div>
-        <div className="p-4 h-screen"></div>
+        <div className="p-4 flex justify-center items-center w-full">
+          <div className="login-bg rounded-xl w-11/12">
+         
+          </div>
+        </div>
       </div>
     </Layout>
   );

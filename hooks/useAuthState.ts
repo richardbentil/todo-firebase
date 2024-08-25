@@ -1,18 +1,22 @@
-import { authState } from "@/lib/firebase-auth/auth_state_listener";
-import { useQuery } from "react-query";
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase-app";
 
-export const useAuth = () => {
-  const {data, isLoading} = useQuery("authData", () => {
-    const response: any = authState();
-    return response
-  })
+const useAuth = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  console.log(data)
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: any) => {
+      setUser(user);
+      setLoading(false);
+    });
 
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
-  return {
-    user: data,
-    isLogedIn: data?.uid && true,
-    isLoading
-  };
+  return { user, loading };
 };
+
+export default useAuth;

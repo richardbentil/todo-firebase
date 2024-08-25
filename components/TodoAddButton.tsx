@@ -9,10 +9,10 @@ function TodoAddButton({
   return (
     <div>
       <button
-        className="rounded-full bg-red-200  add-button flex justify-center items-center"
+        className="rounded-full bg-red-400  add-button flex justify-center items-center"
         onClick={() => setIsModalOpen(true)}
       >
-        <HiPlus size={35} />
+        <HiPlus size={35} color="white" />
       </button>
     </div>
   );

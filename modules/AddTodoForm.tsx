@@ -1,22 +1,41 @@
-import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikValues } from "formik";
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  Formik,
+  FormikHelpers,
+  FormikValues,
+} from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { addDocument } from "@/lib/firebase-firestore/add_document";
+import { setTimeout } from "timers";
+import { updateDocument } from "@/lib/firebase-firestore/update_document";
 
 const Error = ({ name }: { name: string }) => (
   <ErrorMessage name={name} component="div" className="text-sm text-red-500" />
 );
 
-function TodoForm({ setIsModalOpen }: any) {
-  const initialValues = { task: "", priority: "" };
+function TodoForm({ setIsModalOpen, user, item }: any) {
+  const initialValues = { task: item?.task, priority: item?.priority };
+  const queryClient = useQueryClient();
 
   const [msg, setMsg] = useState("");
 
-  const { mutate, isLoading, isError }: any = useMutation(
+  const { mutate, isLoading, isError, data }: any = useMutation(
     async (values: any) => {
       const { task, priority } = values;
-      return await addDocument(task, priority);
+      if (item?.id) {
+        return await updateDocument(item?.id, { task, priority });
+      } else {
+        return await addDocument({
+          userId: user?.uid,
+          task,
+          priority,
+          createdAt: new Date(),
+        });
+      }
     },
     {
       onSuccess(data: any) {
@@ -27,8 +46,12 @@ function TodoForm({ setIsModalOpen }: any) {
               : data.errorMessage
           );
         } else {
-          setMsg("Added todo successfully");
-          setIsModalOpen(false);
+          setMsg("Added/Updated todo successfully");
+          queryClient.invalidateQueries("todos");
+          setTimeout(() => {
+            setMsg("");
+            setIsModalOpen(false);
+          }, 1000);
         }
       },
       onError(error: any, variables, context) {
@@ -74,7 +97,7 @@ function TodoForm({ setIsModalOpen }: any) {
                   Priority
                 </label>
                 <Field
-                as="select"
+                  as="select"
                   name="priority"
                   className="border rounded px-4 py-2 w-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-300"
                 >
@@ -88,7 +111,7 @@ function TodoForm({ setIsModalOpen }: any) {
               {isError && (
                 <p className="text-sm text-red-600">There was an error.</p>
               )}
-              {msg && <p className="text-sm text-green-600">{msg}</p>}
+              {data?.id && <p className="text-sm text-green-600">{msg}</p>}
               <div className="flex justify-between">
                 <button
                   type="button"
@@ -102,7 +125,7 @@ function TodoForm({ setIsModalOpen }: any) {
                   className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded text-white"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Submitting..." : "Add to do"}
+                  {isLoading ? "Submitting..." : item?.id ? "Edit todo" : "Add to do"}
                 </button>
               </div>
             </Form>
@@ -114,10 +137,10 @@ function TodoForm({ setIsModalOpen }: any) {
 }
 
 const schema = Yup.object().shape({
-  task: Yup.string()
-    .required("Enter email")
-    .email("Please enter a valid email"),
-  priority: Yup.string().required("Enter your password"),
+  task: Yup.string().required("Enter task"),
+  priority: Yup.string()
+    .oneOf(["High", "Medium", "Low"], "Select one of the following")
+    .required("Enter your password"),
 });
 
 export default TodoForm;

@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { PasswordInput } from "@mantine/core";
 import * as Yup from "yup";
+import { updateuserProfile } from "@/lib/firebase-auth/auth_update_profile";
 
 const Error = ({ name }: { name: string }) => (
   <ErrorMessage name={name} component="div" className="text-sm text-red-500" />
@@ -33,7 +34,8 @@ function SignupForm({ router }: any) {
       return await signup(name, email, password);
     },
     {
-      onSuccess(data: any, variables, context) {
+      onSuccess(data: any, variables) {
+        console.log(data)
         if (data?.errorCode) {
           setMsg(
             data?.errorCode?.includes("invalid-credential")
@@ -42,10 +44,11 @@ function SignupForm({ router }: any) {
           );
         } else {
           setMsg("Signup successful");
-          router?.push("/todo");
+          updateuserProfile(data?.user, { displayName: variables.name });
+          router?.push("/todos");
         }
       },
-      onError(error: any, variables, context) {
+      onError(error: any) {
         setMsg(error.message);
       },
     }
@@ -59,6 +62,7 @@ function SignupForm({ router }: any) {
       ): void | Promise<any> {
         mutate(values, {
           onSuccess: () => {
+           
             formikHelpers.resetForm();
           },
         });
@@ -98,23 +102,22 @@ function SignupForm({ router }: any) {
             </label>
             <Field
               name="password"
-              type="password"
-              placeholder="************"
-              className="border rounded px-4 py-2 w-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-300"
-            />
-            <Error name="password" />
-          </div>
-          <div className="mb-10mb-5 lg:mb-7">
-            <label htmlFor="confirmPassword" className="block mb-1 font-semibold">
-              Password
-            </label>
-            <Field
-              type="password"
-              name="confirmPassword"
               placeholder="At least 8 characters"
               minLength={8}
               as={PasswordInput}
               autoComplete="new-password" // Enable Google Password Suggest
+             
+            />
+            <Error name="password" />
+          </div>
+          <div className="mb-10 mb-5 lg:mb-7">
+            <label htmlFor="confirmPassword" className="block mb-1 font-semibold">
+              Confirm Password
+            </label>
+            <Field
+              name="confirmPassword"
+              placeholder=""
+              as={PasswordInput}
               />
             <Error name="confirmPassword" />
           </div>

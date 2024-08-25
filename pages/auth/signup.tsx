@@ -8,11 +8,11 @@ function Signup() {
   const router = useRouter();
   return (
     <Layout>
-      <div className="columns-2">
+      <div className="lg:columns-2">
       <div className="pb-3 mt-2 lg:mt-8 xl:mt-0 p-4 h-screen flex justify-center items-center overflow-y-auto">
-          <div className="lg:w-6/12">
+          <div className="w-2/3 lg:w-6/12">
             <h1 className="text-xl font-bold">Sign up</h1>
-            <p className="mb-8">Create an account</p>
+            <p className="mb-4">Create an account</p>
             <SignupForm router={router} />
 
             <div className="w-full my-3">
@@ -43,7 +43,11 @@ function Signup() {
             </div>
           </div>
         </div>
-        <div className="p-4 h-screen"></div>
+        <div className="p-4 flex justify-center items-center w-full hidden md:hidden lg:block">
+          <div className="login-bg rounded-xl w-11/12">
+         
+          </div>
+        </div>
       </div>
     </Layout>
   );

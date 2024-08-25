@@ -1,4 +1,5 @@
 import { signin } from "@/lib/firebase-auth/auth_signin_password";
+import { PasswordInput } from "@mantine/core";
 import {
   ErrorMessage,
   Field,
@@ -33,7 +34,7 @@ function LoginForm({ router }: any) {
           );
         } else {
           setMsg("Login successful");
-          router?.push("/todo");
+          router?.push("/todos");
         }
       },
       onError(error: any, variables, context) {
@@ -76,9 +77,9 @@ function LoginForm({ router }: any) {
             </label>
             <Field
               name="password"
-              type="password"
               placeholder="************"
-              className="border rounded px-4 py-2 w-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-300"
+              as={PasswordInput}
+              
             />
             <Error name="password" />
           </div>

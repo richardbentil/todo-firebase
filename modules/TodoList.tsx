@@ -2,12 +2,17 @@ import { getAllTodos } from "@/lib/firebase-firestore/get_all_documents";
 import React from "react";
 import { useQuery } from "react-query";
 import TodoItem from "./TodoItem";
+import useAuth from "@/hooks/useAuthState";
+import { categorizeTodos } from "@/utils/categorize_todos";
+import { getFormattedDate } from "@/utils/getTodaysDate";
 
-function TodoList() {
+function TodoList({setIsModalOpen, setItem}: any) {
+  const { user }: any = useAuth();
+
   const { data, isLoading, isError }: any = useQuery("todos", async () => {
-    const response = await getAllTodos("todos");
+    const response = await getAllTodos(user?.uid);
     return response;
-  });
+  }, {enabled: Boolean(user?.uid)});
 
   let content: any;
 
@@ -19,23 +24,46 @@ function TodoList() {
     content = <p>Error fetching data</p>;
   }
 
-  const list: any[] = data;
 
-  if (!list || list.length === 0) {
+  const list = categorizeTodos(data)
+
+  const today = list?.today
+
+  const thisWeek = list?.week
+
+  const  pastTodos = list?.pastTodos
+
+  if (!data || data.length === 0) {
     content = <p className="text-center">No todos found</p>;
   }
 
-  if (list) {
+  if (data?.length > 0) {
     content = (
       <>
         <p className="font-semibold mb-5">This Week</p>
-
         <div>
-          <p className="font-semibold text-red-400">Monday, 12th June</p>
+          <p className="font-semibold text-red-400">{getFormattedDate()}</p>
         </div>
-        {list?.map((item: any) => (
+        {today?.map((item: any) => (
           <React.Fragment key={item.id}>
-            <TodoItem item={item} />
+            <TodoItem item={item} setIsModalOpen={setIsModalOpen} setItem={setItem} />
+          </React.Fragment>
+        ))}
+        {thisWeek?.map((item: any) => (
+          <React.Fragment key={item.id}>
+            <TodoItem item={item} setIsModalOpen={setIsModalOpen} setItem={setItem} />
+          </React.Fragment>
+        ))}
+         {pastTodos?.map((item: any) => (
+          <React.Fragment key={item.id}>
+            <TodoItem item={item} setIsModalOpen={setIsModalOpen} setItem={setItem} />
+          </React.Fragment>
+        ))}
+
+       
+        {thisWeek?.map((item: any) => (
+          <React.Fragment key={item.id}>
+            <TodoItem item={item} setIsModalOpen={setIsModalOpen} setItem={setItem} />
           </React.Fragment>
         ))}
       </>
