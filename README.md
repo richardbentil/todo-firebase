@@ -6,7 +6,7 @@ A todo list application
 
 ## Demo
 
-Insert gif or link to demo
+Open [https://todo-firebase-richard.vercel.app/] in your browser
 
 
 ## Run Locally
