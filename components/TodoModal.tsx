@@ -1,8 +1,9 @@
 // components/TodoModal.js
 import React from 'react';
+import { MdClose } from 'react-icons/md';
 
 const TodoModal = ({ isOpen, onClose, children }: any) => {
-  if (!isOpen) return null;
+  if (!isOpen) return <></>;
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
@@ -10,9 +11,9 @@ const TodoModal = ({ isOpen, onClose, children }: any) => {
         <div className="flex justify-end">
           <button
             className="text-red-500"
-            onClick={onClose}
+            onClick={() => onClose(false)}
           >
-            Close
+            <MdClose />
           </button>
         </div>
         <div>{children}</div>

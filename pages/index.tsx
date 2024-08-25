@@ -1,8 +1,11 @@
+import Header from '@/components/common/Header'
+import Layout from '@/components/common/Layout'
 import React from 'react'
 
 function Home() {
   return (
-    <>
+    <Layout>
+      <Header />
      <div className="md:columns-2 h-screen">
       <div className="p-6 flex justify-center items-center h-4/5">
         <div>
@@ -13,7 +16,7 @@ function Home() {
       </div>
       <div className="p-6 h-4/5 flex justify-center items-center">you</div>
     </div>
-    </>
+    </Layout>
   )
 }
 

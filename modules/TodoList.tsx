@@ -19,15 +19,20 @@ function TodoList() {
     content = <p>Error fetching data</p>;
   }
 
-  const list = data;
+  const list: any[] = data;
 
   if (!list || list.length === 0) {
-    content = <p>No todos found</p>;
+    content = <p className="text-center">No todos found</p>;
   }
 
   if (list) {
     content = (
       <>
+        <p className="font-semibold mb-5">This Week</p>
+
+        <div>
+          <p className="font-semibold text-red-400">Monday, 12th June</p>
+        </div>
         {list?.map((item: any) => (
           <React.Fragment key={item.id}>
             <TodoItem item={item} />
