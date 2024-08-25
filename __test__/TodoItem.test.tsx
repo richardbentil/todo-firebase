@@ -1,4 +1,4 @@
-import TodoItem, { TodoProps } from "@/modules/TodoItem";
+import TodoItem from "@/modules/TodoItem";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 
