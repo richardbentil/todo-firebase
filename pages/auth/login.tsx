@@ -1,4 +1,5 @@
 import Layout from "@/components/common/Layout";
+import FaceBookGoogleButtons from "@/modules/FaceBookGoogleButtons";
 import LoginForm from "@/modules/LoginForm";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,22 +26,7 @@ function Login() {
                 <span className="border-b w-2/3 mb-2"></span>
               </div>
             </div>
-            <div className="mb-4">
-              <button
-                type="submit"
-                className="w-full bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
-              >
-                Sign in with google
-              </button>
-            </div>
-            <div className="mb-6">
-              <button
-                type="submit"
-                className="w-full bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
-              >
-                Sign in with facebook
-              </button>
-            </div>
+            <FaceBookGoogleButtons text="Sign in" page="login" router={router} />
             <div className="mb-8 flex justify-center">
               <p className="">Dont you have an account? <Link href="/auth/signup" className="text-blue-600">Sign up</Link></p>
             </div>

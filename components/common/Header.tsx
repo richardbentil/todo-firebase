@@ -1,5 +1,7 @@
+import { signout } from '@/lib/firebase-auth/auth_signout'
 import Link from 'next/link'
 import React from 'react'
+import { HiLogout } from 'react-icons/hi'
 
 function Header({user}: any) {
   return (
@@ -9,14 +11,14 @@ function Header({user}: any) {
           <Link href="/" className="text-xl font-bold">
             Todoist
           </Link>
-          <div>
-          {user?.uid && <Link href="/todos" className="ml-4 text-xl font-semibold text-red-500">
+          <div className='flex'>
+          {user?.uid && <Link href="/todos" className="ml-6 text-xl font-semibold text-red-500">
               Todos
             </Link>}
           {user?.uid ? (
-            <Link href="/auth/logout" className="ml-4 text-xl font-bold">
-              Logout
-            </Link>
+            <button className="ml-4 text-xl flex items-center" onClick={signout}>
+             <span className='me-2'>Logout</span>  <HiLogout />
+            </button>
           ) : (
             <Link href="/auth/login" className="ml-4 text-xl font-semibold">
               Login

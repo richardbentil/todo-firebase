@@ -12,8 +12,8 @@ function Layout({children}: {children: React.ReactNode}) {
         <meta name="description" content="A todo application" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      {children}
-      <Script src="https://cdn.tailwindcss.com" />
+      {children}{/* 
+      <Script src="https://cdn.tailwindcss.com" /> */}
     </>
   );
 }

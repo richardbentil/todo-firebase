@@ -1,8 +1,12 @@
 import Layout from "@/components/common/Layout";
+import FaceBookGoogleButtons from "@/modules/FaceBookGoogleButtons";
+import FaceBookGoogleSignup from "@/modules/FaceBookGoogleButtons";
 import SignupForm from "@/modules/SignupForm";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { BiLogoFacebookCircle } from "react-icons/bi";
+import { FcGoogle } from "react-icons/fc";
 
 function Signup() {
   const router = useRouter();
@@ -22,22 +26,7 @@ function Signup() {
                 <span className="border-b w-2/3 mb-2"></span>
               </div>
             </div>
-            <div className="mb-4">
-              <button
-                type="submit"
-                className="w-full bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
-              >
-                Sign up with google
-              </button>
-            </div>
-            <div className="mb-6">
-              <button
-                type="submit"
-                className="w-full bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
-              >
-                Sign up with facebook
-              </button>
-            </div>
+           <FaceBookGoogleButtons text="Sign up" page="signup" router={router} />
             <div className="mb-8 flex justify-center">
               <p className="">Do you have an account?  <Link href="/auth/login" className="text-blue-600">Login</Link> </p>
             </div>
