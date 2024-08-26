@@ -39,25 +39,25 @@ function FaceBookGoogleButtons({page, router, text}: any) {
     <div className="mb-4">
     <button
       type="submit"
-      className="w-full bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded flex justify-center items-center text-center"
+      className="w-full bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded flex justify-center items-center text-center flex-nowrap"
       onClick={() => {
         setAuthType("google")
         mutate()
       }}
     >
-     <FcGoogle className="me-2" size={25} /> {text} with google
+     <FcGoogle className="me-2" size={23} /> {text} with google
     </button>
   </div>
   <div className="mb-6">
     <button
       type="submit"
-      className="w-full bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded flex justify-center items-center text-center"
+      className="w-full bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded flex justify-center items-center text-center flex-nowrap"
       onClick={() => {
         setAuthType("facebook")
         mutate()
       }}
     >
-    <BiLogoFacebookCircle size={25} className="me-2 text-blue-700" />   {text} with facebook
+    <BiLogoFacebookCircle size={23} className="me-2 text-blue-700" />   {text} with facebook
     </button>
   </div>
     </>

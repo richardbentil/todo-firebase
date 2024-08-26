@@ -58,7 +58,7 @@ function LoginForm({ router }: any) {
       validationSchema={schema}
     >
       {() => (
-        <Form action="">
+        <Form>
           <div className="mb-2 lg:mb-4">
             <label htmlFor="email" className="block mb-1 font-semibold">
               Email
@@ -67,7 +67,7 @@ function LoginForm({ router }: any) {
               name="email"
               type="email"
               placeholder="Example@gmail.com"
-              className="border rounded px-4 py-2 w-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-300"
+              className="border rounded px-3 py-1 w-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-300"
             />
             <Error name="email" />
           </div>
@@ -89,7 +89,7 @@ function LoginForm({ router }: any) {
           <div className="mb-2 lg:mb-4">
           <button
               type="submit"
-              className="w-full  bg-black hover:bg-gray-800 px-4 py-2 rounded text-white"
+              className="w-full  bg-black hover:bg-gray-800 px-3 py-1 rounded text-white"
               disabled={isLoading}
             >
               {isLoading ? "Submitting..." : "Sign in"}

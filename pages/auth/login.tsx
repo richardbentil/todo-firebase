@@ -1,7 +1,6 @@
 import Layout from "@/components/common/Layout";
 import FaceBookGoogleButtons from "@/modules/FaceBookGoogleButtons";
 import LoginForm from "@/modules/LoginForm";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -13,7 +12,7 @@ function Login() {
     <Layout>
       <div className="lg:columns-2">
         <div className="pb-3 mt-2 lg:mt-8 xl:mt-0 p-4 h-screen flex justify-center items-center overflow-y-auto">
-          <div className="lg:w-6/12">
+          <div className="w-full lg:w-6/12">
             <h1 className="text-xl font-bold">Welcome back</h1>
             <p className="mb-4 lg:mb-0">Today is a new day. Its your day. You shape it</p>
             <p className="mb-4 lg:mb-8">Sign in to start managing your projects</p>
@@ -32,7 +31,7 @@ function Login() {
             </div>
           </div>
         </div>
-        <div className="p-4 flex justify-center items-center w-full">
+        <div className="p-4 flex justify-center items-center w-full hidden md:hidden lg:block">
           <div className="login-bg rounded-xl w-11/12">
          
           </div>

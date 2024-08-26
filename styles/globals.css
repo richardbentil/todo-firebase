@@ -4,10 +4,14 @@
 @tailwind utilities;
 
 .mantine-1g34wzq {
-  height: 2.5rem !important;
+  height: 2.2rem !important;
   background-color: rgb(243 244 246) !important;
   border-color: #e5e7eb !important;
   --tw-bg-opacity: 1;
+}
+
+button {
+  height: 2.2rem !important;
 }
 
 .add-button {
