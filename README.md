@@ -17,6 +17,9 @@ Clone the project
   git clone https://github.com/richardbentil/todo-firebase.git
 ```
 
+## Note
+Make sure you have .env.local to help you run the project locally
+
 Go to the project directory
 
 ```bash
